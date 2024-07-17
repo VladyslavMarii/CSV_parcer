@@ -1,6 +1,6 @@
 package com.example.csv_parcer.controllers;
 
-import com.example.csv_parcer.exceptions.FailToUploadEcxeption;
+import com.example.csv_parcer.exceptions.FailToUploadException;
 import com.example.csv_parcer.services.CsvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class MyController {
         }
         try {
             csvService.save(file);
-        } catch (FailToUploadEcxeption e) {
+        } catch (FailToUploadException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         return  ResponseEntity.status(HttpStatus.OK).body("File uploaded and data saved");
