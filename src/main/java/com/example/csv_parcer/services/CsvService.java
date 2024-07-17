@@ -3,11 +3,13 @@ package com.example.csv_parcer.services;
 import com.example.csv_parcer.Entities.CsvEntity;
 import com.example.csv_parcer.exceptions.FailToUploadException;
 import com.example.csv_parcer.repo.CsvStorageRepo;
+import com.example.csv_parcer.specifications.CsvEntitySpecifications;
 import jakarta.transaction.Transactional;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -94,4 +96,8 @@ public class CsvService {
         return delimiterCounts.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
     }
 
+    public List<CsvEntity> search(String keyword) {
+        Specification<CsvEntity> spec = CsvEntitySpecifications.containsKeyword(keyword);
+        return repository.findAll(spec);
+    }
 }
