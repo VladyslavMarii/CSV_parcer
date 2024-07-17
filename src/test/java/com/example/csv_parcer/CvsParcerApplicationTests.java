@@ -1,4 +1,4 @@
-package com.example.cvs_parcer;
+package com.example.csv_parcer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
